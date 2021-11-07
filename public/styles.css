@@ -35,6 +35,8 @@ tr:nth-child(even) {
 .total {
   font-size: 150%;
   text-decoration: underline;
+  font-family: Rockwell, 'Courier New', Courier, monospace;
+  font-style: italic;
 }
 
 .form {
