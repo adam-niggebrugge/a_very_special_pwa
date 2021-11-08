@@ -1,6 +1,8 @@
 body {
   font-size: 120%;
   font-family: Arial;
+  background-image: radial-gradient(#E0F2CE, #00F5BC, #238056);
+  height: 1000px;
 }
 
 button, input {
@@ -50,4 +52,8 @@ tr:nth-child(even) {
   overflow: auto;
   width: 90%;
   margin: 0 auto;
+}
+
+.cust-chart {
+  background-color: #ac3eb57;
 }
