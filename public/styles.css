@@ -1,7 +1,7 @@
 body {
   font-size: 120%;
   font-family: Arial;
-  background-image: radial-gradient(#E0F2CE, #00F5BC, #238056);
+  background-image: radial-gradient(#E0F2CE, #00F5BC);
   height: 1000px;
 }
 
@@ -12,6 +12,7 @@ button, input {
 
 table {
   width: 100%;
+  background-color: #FFFFFF;
 }
 
 td, th {
@@ -36,9 +37,11 @@ tr:nth-child(even) {
 
 .total {
   font-size: 150%;
-  text-decoration: underline;
+  
   font-family: Rockwell, 'Courier New', Courier, monospace;
   font-style: italic;
+  border: 1px solid #dddddd;
+  background-color: #FFFFFF;
 }
 
 .form {
