@@ -3,7 +3,7 @@ const FILES_TO_CACHE = [
   '/index.html',
   '/favorites.html',
   '/topic.html',
-  '/assets/css/style.css',
+  '/styles.css',
   '/dist/app.bundle.js',
   '/dist/favorites.bundle.js',
   '/dist/topic.bundle.js',
@@ -14,6 +14,7 @@ const FILES_TO_CACHE = [
 const PRECACHE = 'precache-v1';
 const RUNTIME = 'runtime';
 
+//set up for install events
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
@@ -44,21 +45,36 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.startsWith(self.location.origin)) {
+  //check if request to update data
+  if (event.request.url.indcludes("/api")) {
     event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
+      caches.open(RUNTIME)
+      .then(async (cachedResponse) => {
+        try {
+          const response = await fetch(event.request);
+          if (response.status === 200) {
+            cache.put(event.request.url, response.clone());
+          }
           return cachedResponse;
+        } catch (err) {
+          console.log(`There is an error in Network conect, cache time ${err}`);
+          return cachedResponse.match(event.request);
         }
-
-        return caches.open(RUNTIME).then((cache) => {
-          return fetch(event.request).then((response) => {
-            return cache.put(event.request, response.clone()).then(() => {
-              return response;
-            });
-          });
-        });
-      })
+      }).catch(err1 => {
+        console.log(`~~~~~ Outer fetch error1 ${err1}`);
+      });
     );
-  }
+  return;
+}
+
+  e2.respondWith(
+    fetch(e2.request).catch(function() {
+      return caches.match(e2.request).then(function(response){
+        return response;
+      } else if (e2.request.headers.get("accept").includes("text/html")) {
+        return caches.match("/");
+      }
+    });
+    })
+  );
 });
