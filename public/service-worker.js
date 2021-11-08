@@ -1,13 +1,14 @@
 const FILES_TO_CACHE = [
   '/',
+  '/manifest.json',
   '/index.html',
-  '/favorites.html',
   '/styles.css',
-  '/dist/app.bundle.js',
-  '/dist/favorites.bundle.js',
-  '/dist/topic.bundle.js',
+  '/db.js',
+  '/index.js',
   'https://fonts.googleapis.com/css?family=Istok+Web|Montserrat:800&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
 ];
 
 const PRECACHE = 'my-site-cache-v1';
@@ -43,10 +44,10 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', (e) => {
   //check if request to update data
-  if (event.request.url.indcludes("/api")) {
-    event.respondWith(
+  if (e.request.url.includes("/api")) {
+    e.respondWith(
       caches.open(RUNTIME)
       .then(async (cachedResponse) => {
         try {
@@ -57,19 +58,19 @@ self.addEventListener('fetch', (event) => {
           return cachedResponse;
         } catch (err) {
           console.log(`There is an error in Network conect, cache time ${err}`);
-          return cachedResponse.match(event.request);
+          return cachedResponse.match(e.request);
         }
       })
     );
   return;
 }
 
-  e2.respondWith(
-    fetch(e2.request).catch(function() {
-      return caches.match(e2.request).then(function(response){
+  e.respondWith(
+    fetch(e.request).catch(function() {
+      return caches.match(e.request).then(function(response){
       if (respone) {
         return response;
-      } else if (e2.request.headers.get("accept").includes("text/html")) {
+      } else if (e.request.headers.get("accept").includes("text/html")) {
         return caches.match("/");
       }
     });
