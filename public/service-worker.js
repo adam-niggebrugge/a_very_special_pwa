@@ -2,7 +2,6 @@ const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/favorites.html',
-  '/topic.html',
   '/styles.css',
   '/dist/app.bundle.js',
   '/dist/favorites.bundle.js',
@@ -11,8 +10,8 @@ const FILES_TO_CACHE = [
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
 ];
 
-const PRECACHE = 'precache-v1';
-const RUNTIME = 'runtime';
+const PRECACHE = 'my-site-cache-v1';
+const RUNTIME = 'data-cache-v1';
 
 //set up for install events
 self.addEventListener('install', (event) => {
@@ -60,9 +59,7 @@ self.addEventListener('fetch', (event) => {
           console.log(`There is an error in Network conect, cache time ${err}`);
           return cachedResponse.match(event.request);
         }
-      }).catch(err1 => {
-        console.log(`~~~~~ Outer fetch error1 ${err1}`);
-      });
+      })
     );
   return;
 }
@@ -70,6 +67,7 @@ self.addEventListener('fetch', (event) => {
   e2.respondWith(
     fetch(e2.request).catch(function() {
       return caches.match(e2.request).then(function(response){
+      if (respone) {
         return response;
       } else if (e2.request.headers.get("accept").includes("text/html")) {
         return caches.match("/");
