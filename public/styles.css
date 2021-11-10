@@ -1,6 +1,8 @@
 body {
   font-size: 120%;
   font-family: Arial;
+  background-image: radial-gradient(#E0F2CE, #00F5BC);
+  height: 1000px;
 }
 
 button, input {
@@ -10,6 +12,7 @@ button, input {
 
 table {
   width: 100%;
+  background-color: #FFFFFF;
 }
 
 td, th {
@@ -34,7 +37,11 @@ tr:nth-child(even) {
 
 .total {
   font-size: 150%;
-  text-decoration: underline;
+  
+  font-family: Rockwell, 'Courier New', Courier, monospace;
+  font-style: italic;
+  border: 1px solid #dddddd;
+  background-color: #FFFFFF;
 }
 
 .form {
@@ -48,4 +55,8 @@ tr:nth-child(even) {
   overflow: auto;
   width: 90%;
   margin: 0 auto;
+}
+
+.cust-chart {
+  background-color: #ac3eb57;
 }
