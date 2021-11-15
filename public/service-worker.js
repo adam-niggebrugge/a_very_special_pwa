@@ -68,7 +68,7 @@ self.addEventListener('fetch', (e) => {
   e.respondWith(
     fetch(e.request).catch(function() {
       return caches.match(e.request).then(function(response){
-      if (respone) {
+      if (response) {
         return response;
       } else if (e.request.headers.get("accept").includes("text/html")) {
         return caches.match("/");
