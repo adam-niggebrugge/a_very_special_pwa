@@ -51,9 +51,9 @@ self.addEventListener('fetch', (e) => {
       caches.open(RUNTIME)
       .then(async (cachedResponse) => {
         try {
-          const response = await fetch(event.request);
+          const response = await fetch(e.request);
           if (response.status === 200) {
-            cache.put(event.request.url, response.clone());
+            cache.put(e.request.url, response.clone());
           }
           return cachedResponse;
         } catch (err) {
